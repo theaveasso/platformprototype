@@ -31,6 +31,17 @@ texture = SubResource("PlaceholderTexture2D_edjgo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_01/StaticBody2D" unique_id=1766247359]
 shape = SubResource("RectangleShape2D_rupst")
 
+[node name="Wall_02" type="Sprite2D" parent="." unique_id=1891938008]
+position = Vector2(331, 220.99998)
+rotation = 1.5707964
+scale = Vector2(1.5999985, 1)
+texture = SubResource("PlaceholderTexture2D_edjgo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall_02" unique_id=42152981]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_02/StaticBody2D" unique_id=1336249156]
+shape = SubResource("RectangleShape2D_rupst")
+
 [node name="Player" parent="." unique_id=599789611 instance=ExtResource("1_rupst")]
 position = Vector2(239, 199)
 scale = Vector2(0.9735648, 1.0115649)

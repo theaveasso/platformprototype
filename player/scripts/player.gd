@@ -3,6 +3,10 @@ class_name Player extends CharacterBody2D
 signal state_changed(from_state: PlayerState, to_state: PlayerState)
 
 const GRAVITY: float = 980.0
+var gravity_multiplier: float = 1.0
+
+@export var move_speed: float = 120.0
+@export var jump_velocity: float = 360.0
 
 @export var initial_state: PlayerState
 
@@ -11,26 +15,27 @@ var current_state: PlayerState
 var previous_state: PlayerState
 
 func _ready() -> void:
-	_init_states()
+	state_changed.connect(on_state_changed)
+	init_states()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if current_state:
-		_transition_to(current_state.handle_input(event))
+		transition_to(current_state.handle_input(event))
 
 func _process(delta: float) -> void:
-	_update_direction()
+	update_direction()
 	if current_state:
-		_transition_to(current_state.process(delta))
+		transition_to(current_state.process(delta))
 
 func _physics_process(delta: float) -> void:
 	var next: PlayerState = null
 	if current_state:
 		next = current_state.physics_process(delta)
-	velocity.y += GRAVITY * delta
+	velocity.y += GRAVITY * gravity_multiplier * delta
 	move_and_slide()
-	_transition_to(next)
+	transition_to(next)
 
-func _init_states() -> void:
+func init_states() -> void:
 	var states: Array[PlayerState] = []
 	for child in $States.get_children():
 		if child is PlayerState:
@@ -46,8 +51,9 @@ func _init_states() -> void:
 
 	current_state = initial_state if initial_state != null else states[0]
 	current_state.enter()
+	state_changed.emit(null, current_state)
 
-func _transition_to(next: PlayerState) -> void:
+func transition_to(next: PlayerState) -> void:
 	if next == null or next == current_state:
 		return
 	current_state.exit()
@@ -56,5 +62,11 @@ func _transition_to(next: PlayerState) -> void:
 	current_state.enter()
 	state_changed.emit(previous_state, current_state)
 
-func _update_direction() -> void:
-	direction = Input.get_vector("Left", "Right", "Up", "Down")
+func on_state_changed(_from: PlayerState, to: PlayerState) -> void:
+	if has_node("Debug/State"):
+		$Debug/State.text = to.name
+
+func update_direction() -> void:
+	var axis_x = Input.get_axis("Left", "Right")
+	var axis_y = Input.get_axis("Up", "Down")
+	direction = Vector2(axis_x, axis_y)

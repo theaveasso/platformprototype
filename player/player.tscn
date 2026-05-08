@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://csr4biygqfsh3" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://c3blugj38hmeb" path="res://player/states/state_idle.gd" id="2_g1dw6"]
 [ext_resource type="Script" uid="uid://benwm1ix6kkfv" path="res://player/states/state_run.gd" id="3_yw30f"]
+[ext_resource type="Script" uid="uid://fkujfpw52dor" path="res://player/states/state_jump.gd" id="4_qjkh3"]
+[ext_resource type="Script" uid="uid://bpe6q7anehuvb" path="res://player/states/state_fall.gd" id="5_g6k8r"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kqu6x"]
 size = Vector2(18, 48)
@@ -24,10 +26,34 @@ shape = SubResource("RectangleShape2D_kqu6x")
 
 [node name="States" type="Node" parent="." unique_id=1132505731]
 
-[node name="Idle" type="Node" parent="States" unique_id=559355435 node_paths=PackedStringArray("run_state")]
+[node name="Idle" type="Node" parent="States" unique_id=559355435 node_paths=PackedStringArray("run_state", "jump_state", "fall_state")]
 script = ExtResource("2_g1dw6")
 run_state = NodePath("../Run")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
 
-[node name="Run" type="Node" parent="States" unique_id=787838712 node_paths=PackedStringArray("idle_state")]
+[node name="Run" type="Node" parent="States" unique_id=787838712 node_paths=PackedStringArray("idle_state", "jump_state", "fall_state")]
 script = ExtResource("3_yw30f")
 idle_state = NodePath("../Idle")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
+
+[node name="Jump" type="Node" parent="States" unique_id=1278016248 node_paths=PackedStringArray("fall_state")]
+script = ExtResource("4_qjkh3")
+fall_state = NodePath("../Fall")
+
+[node name="Fall" type="Node" parent="States" unique_id=1420723386 node_paths=PackedStringArray("idle_state", "run_state", "jump_state")]
+script = ExtResource("5_g6k8r")
+idle_state = NodePath("../Idle")
+run_state = NodePath("../Run")
+jump_state = NodePath("../Jump")
+
+[node name="Debug" type="Node2D" parent="." unique_id=1373225590]
+
+[node name="State" type="Label" parent="Debug" unique_id=1739691818]
+offset_left = -20.0
+offset_top = -72.0
+offset_right = 20.0
+offset_bottom = -49.0
+text = "Debug"
+horizontal_alignment = 1
