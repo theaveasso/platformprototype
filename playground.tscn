@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://2ghht852ngxp"]
+
+[ext_resource type="PackedScene" uid="uid://1sfqhpu7niju" path="res://player/player.tscn" id="1_rupst"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_edjgo"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rupst"]
+size = Vector2(32, 32)
+
+[node name="Playground" type="Node2D" unique_id=643187651]
+
+[node name="Ground_01" type="Sprite2D" parent="." unique_id=658202827]
+position = Vector2(231, 257)
+scale = Vector2(18.44, 1)
+texture = SubResource("PlaceholderTexture2D_edjgo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ground_01" unique_id=459178461]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground_01/StaticBody2D" unique_id=1019564620]
+shape = SubResource("RectangleShape2D_rupst")
+
+[node name="Wall_01" type="Sprite2D" parent="." unique_id=1269310139]
+position = Vector2(6, 214.00002)
+rotation = 1.5707964
+scale = Vector2(18.44, 1)
+texture = SubResource("PlaceholderTexture2D_edjgo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall_01" unique_id=1278292695]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_01/StaticBody2D" unique_id=1766247359]
+shape = SubResource("RectangleShape2D_rupst")
+
+[node name="Wall_02" type="Sprite2D" parent="." unique_id=670223873]
+position = Vector2(179.00002, -46)
+rotation = 0.1477513
+scale = Vector2(18.44, 4.684148)
+texture = SubResource("PlaceholderTexture2D_edjgo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall_02" unique_id=1733423143]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_02/StaticBody2D" unique_id=1082658642]
+shape = SubResource("RectangleShape2D_rupst")
+
+[node name="Wall_03" type="Sprite2D" parent="." unique_id=387741698]
+position = Vector2(755, 5)
+scale = Vector2(18.44, 4.165784)
+texture = SubResource("PlaceholderTexture2D_edjgo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall_03" unique_id=525103854]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_03/StaticBody2D" unique_id=732826035]
+shape = SubResource("RectangleShape2D_rupst")
+
+[node name="Wall_04" type="Sprite2D" parent="." unique_id=875771598]
+position = Vector2(140.00006, -48)
+scale = Vector2(18.44, 4.165784)
+texture = SubResource("PlaceholderTexture2D_edjgo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall_04" unique_id=1749229584]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_04/StaticBody2D" unique_id=1810035075]
+shape = SubResource("RectangleShape2D_rupst")
+
+[node name="Player" parent="." unique_id=599789611 instance=ExtResource("1_rupst")]
+position = Vector2(239, 199)
+scale = Vector2(0.9735648, 1.0115649)
